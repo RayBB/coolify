@@ -1,0 +1,20 @@
+# documentation: https://jdownloader.org/
+# slogan: JDownloader is a free, open-source download management tool with a huge community that makes downloading as easy and fast as it should be.
+# tags: filestorage, data, downloads, media
+
+services:
+  jdownloader:
+    image: 'jlesage/jdownloader-2'
+    environment:
+      - SERVICE_FQDN_JDOWNLOADER
+      - USER_ID=1000
+      - GROUP_ID=1000
+      - TZ=Etc/UTC
+      - VNC_PASSWORD=$SERVICE_PASSWORD_VNC
+    volumes:
+      - 'jdownloader-config:/config'
+      - 'jdownloader-data:/output'
+    ports:
+      - '5800:5800' # GUI WEB
+      - '5900:5900' # GUI VNC
+      - '3129:3129' # MyJDownloader application access
